@@ -169,16 +169,57 @@ function script5 () {
 // script_6 ---------------
 
 function script6() {
-  function string2Arn (str) {
+  function arn2Aacids (str) {
+    str = str.toUpperCase();
+    let codons = [];
     while (str.length >= 3) {
-
+      codons.push(str.slice(0,3));
+      str = str.slice(3);
     }
+    aaAray = codons.map(
+      codon => {
+        if (["UCU", "UCC", "UCA", "UCG", "AGU", "AGC"].includes(codon)) {
+          return "Sérine"
+        } else if (["CCU", "CCC", "CCA", "CCG"].includes(codon)) {
+          return "Proline"
+        } else if (["UUA", "UUG"].includes(codon)) {
+          return "Leucine"
+        } else if (["UUU", "UUC"].includes(codon)) {
+          return "Phénylalanine"
+        } else if (["CGU", "CGC", "CGA", "CGG", "AGA", "AGG"].includes(codon)) {
+          return "Arginine"
+        } else if (["UAU", "UAC"].includes(codon)) {
+          return "Tyrosine"
+        } else {
+          return "(unknown)"
+        }
+      }
+    );
+    return aaAray.join("-");
   }
+
+  console.log("Traduisons UUACGCAGUAGA");
+  console.log(arn2Aacids("UUACGCAGUAGA"));
+
+  console.log("Traduisons CCGUCGUUGCGCUACAGC");
+  console.log(arn2Aacids("CCGUCGUUGCGCUACAGC"));
+
+  console.log("Traduisons CCUCGCCGGUACUUCUCG");
+  console.log(arn2Aacids("CCUCGCCGGUACUUCUCG"));
+}
+
+// script_7 ------------------
+function script7 () {
+
 }
 
 
-// script1();
-// script2();
-// script3();
-// script4();
+// LANCEMENT -----------------
+
+script1();
+script2();
+script3();
+script4();
 script5();
+script6();
+script7();
